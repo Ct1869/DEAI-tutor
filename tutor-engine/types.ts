@@ -1,0 +1,54 @@
+export type EvidenceKind = 'recognition' | 'recall' | 'application' | 'writing' | 'speaking' | 'retention';
+export type Phase = 'diagnostic' | 'teach' | 'guided' | 'recall' | 'application' | 'writing' | 'speaking' | 'retention';
+export type SourceRef = { bookPdfPage: number; printedPage: number; exercise?: number; item?: number; answerPdfPage?: number; answerPrintedPage?: number; status: 'verified' | 'example' | 'unmapped' };
+export type Activity = {
+  id: string;
+  objectiveId: string;
+  phase: Phase;
+  instruction: string;
+  explanation?: string;
+  expected?: string[];
+  rubric?: string;
+  source: SourceRef;
+  responseMode: 'text' | 'speech';
+  estimatedSeconds: number;
+  generated?: boolean;
+};
+export type Objective = {
+  id: string;
+  title: string;
+  rule: string;
+  prerequisites: string[];
+  source: SourceRef[];
+  required: EvidenceKind[];
+  activities: Activity[];
+};
+export type Unit = {
+  id: string;
+  title: string;
+  sourceHash: string;
+  answerHash: string;
+  totalBookPages: number;
+  bookPages: number[];
+  answerPages: number[];
+  expectedExercises: number[];
+  reviewStatus: 'source-reviewed' | 'needs-review';
+  objectives: Objective[];
+};
+export type Attempt = {
+  id?: number;
+  sessionId: string;
+  unitId: string;
+  objectiveId: string;
+  activityId: string;
+  phase: Phase;
+  response: string;
+  correct: boolean | null;
+  assisted: boolean;
+  feedback: string;
+  grading: 'exact' | 'pending' | 'self-report' | 'model';
+  confidence: number;
+  createdAt: number;
+};
+export type Review = { objectiveId: string; evidenceKind: EvidenceKind; dueAt: number; intervalDays: number; ease: number; successes: number; lapses: number; lastAt: number };
+export type Session = { id: string; unitId: string; budgetMinutes: number; startedAt: number; endedAt?: number; currentActivityId?: string; queue: string[]; completed: string[]; feedback?: string; waitingForModel?: boolean };

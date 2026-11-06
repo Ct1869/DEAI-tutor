@@ -1,0 +1,16 @@
+{
+  "name": "Deutsch Quiz",
+  "short_name": "Deutsch",
+  "description": "Daily German quizzes + vocab SRS",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080d19",
+  "theme_color": "#a8ff78",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" }
+  ]
+}
